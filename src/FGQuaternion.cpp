@@ -56,10 +56,7 @@ using std::endl;
   DEFINITIONS
   %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%*/
 
-namespace JSBSim {
   
-IDENT(IdSrc,"$Id: FGQuaternion.cpp,v 1.24 2014/01/13 10:46:03 ehofman Exp $");
-IDENT(IdHdr,ID_QUATERNION);
 
 //%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -257,4 +254,3 @@ std::ostream& operator<<(std::ostream& os, const FGQuaternion& q)
   return os;
 }
 
-} // namespace JSBSim

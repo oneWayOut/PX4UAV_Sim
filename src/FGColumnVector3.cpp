@@ -46,10 +46,7 @@ INCLUDES
 
 using namespace std;
 
-namespace JSBSim {
 
-IDENT(IdSrc,"$Id: FGColumnVector3.cpp,v 1.17 2014/01/13 10:46:03 ehofman Exp $");
-IDENT(IdHdr,ID_COLUMNVECTOR3);
 
 /*%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 CLASS IMPLEMENTATION
@@ -58,7 +55,6 @@ CLASS IMPLEMENTATION
 FGColumnVector3::FGColumnVector3(void)
 {
   data[0] = data[1] = data[2] = 0.0;
-  // Debug(0);
 }
 
 //%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -131,6 +127,3 @@ FGColumnVector3& FGColumnVector3::Normalize(void)
 double FGColumnVector3::Magnitude(const int idx1, const int idx2) const {
   return sqrt( data[idx1-1]*data[idx1-1] +  data[idx2-1]*data[idx2-1] );
 }
-
-
-} // namespace JSBSim

@@ -49,13 +49,11 @@ INCLUDES
 DEFINITIONS
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%*/
 
-#define ID_MATRIX33 "$Id: FGMatrix33.h,v 1.17 2012/11/22 22:04:06 bcoconni Exp $"
 
 /*%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 FORWARD DECLARATIONS
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%*/
 
-namespace JSBSim {
 
 class FGColumnVector3;
 class FGQuaternion;
@@ -468,5 +466,4 @@ std::ostream& operator<<(std::ostream& os, const FGMatrix33& M);
 */
 std::istream& operator>>(std::istream& is, FGMatrix33& M);
 
-} // namespace JSBSim
 #endif

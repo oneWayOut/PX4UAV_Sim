@@ -38,24 +38,22 @@ SENTRY
 INCLUDES
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%*/
 
-#include "models/FGModel.h"
-#include "math/FGColumnVector3.h"
-#include "math/FGLocation.h"
-#include "math/FGQuaternion.h"
-#include "math/FGMatrix33.h"
+//#include "models/FGModel.h"
+#include "FGColumnVector3.h"
+#include "FGLocation.h"
+#include "FGQuaternion.h"
+#include "FGMatrix33.h"
 #include <deque>
 
 /*%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 DEFINITIONS
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%*/
 
-#define ID_PROPAGATE "$Id: FGPropagate.h,v 1.85 2016/04/16 12:24:39 bcoconni Exp $"
 
 /*%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 FORWARD DECLARATIONS
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%*/
 
-namespace JSBSim {
 
 class FGInitialCondition;
 
@@ -99,7 +97,7 @@ CLASS DOCUMENTATION
 CLASS DECLARATION
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%*/
 
-class FGPropagate : public FGModel {
+class FGPropagate{
 public:
 
   /** The current vehicle state vector structure contains the translational and
@@ -153,7 +151,7 @@ public:
       - integrator, rotational position = Trapezoidal
       - integrator, translational position = Trapezoidal
       @param Executive a pointer to the parent executive object */
-  FGPropagate(FGFDMExec* Executive);
+  FGPropagate();
 
   /// Destructor
   ~FGPropagate();
@@ -578,7 +576,7 @@ public:
   void SetDistanceAGL(double tt);
   void SetDistanceAGLKm(double tt);
 
-  void SetInitialState(const FGInitialCondition*);
+  void SetInitialState(/*const FGInitialCondition**/);
   void SetLocation(const FGLocation& l);
   void SetLocation(const FGColumnVector3& lv)
   {
@@ -664,8 +662,7 @@ private:
 
   void WriteStateFile(int num);
   void bind(void);
-  void Debug(int from);
 };
-}
+
 //%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 #endif

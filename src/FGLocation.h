@@ -45,19 +45,20 @@ INCLUDES
 #include "FGJSBBase.h"
 #include "FGColumnVector3.h"
 #include "FGMatrix33.h"
-#include "input_output/FGGroundCallback.h"
+
+#include "FGAdaptor.h"
+
+//#include "input_output/FGGroundCallback.h"
 
 /*%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 DEFINITIONS
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%*/
 
-#define ID_LOCATION "$Id: FGLocation.h,v 1.35 2015/09/20 20:53:13 bcoconni Exp $"
 
 /*%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 FORWARD DECLARATIONS
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%*/
 
-namespace JSBSim {
 
 /*%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 CLASS DOCUMENTATION
@@ -157,7 +158,7 @@ CLASS DOCUMENTATION
 CLASS DECLARATION
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%*/
 
-class FGLocation : public FGJSBBase
+class FGLocation
 {
 public:
   /** Default constructor. */
@@ -345,19 +346,19 @@ public:
       @return the sea level radius at the location in feet.
       @see SetGroundCallback */
   double GetSeaLevelRadius(void) const
-  { ComputeDerived(); return GroundCallback->GetSeaLevelRadius(*this); }
+  { ComputeDerived(); return GetSeaLevelRadius0(); }
 
   /** Get the local terrain radius
       @return the terrain level radius at the location in feet.
       @see SetGroundCallback */
   double GetTerrainRadius(void) const
-  { ComputeDerived(); return GroundCallback->GetTerrainGeoCentRadius(*this); }
+  { ComputeDerived(); return GetTerrainGeoCentRadius(); }
 
   /** Get the altitude above sea level.
       @return the altitude ASL in feet.
       @see SetGroundCallback */
   double GetAltitudeASL(void) const
-  { ComputeDerived(); return GroundCallback->GetAltitude(*this); }
+  { ComputeDerived(); return GetAltitude(*this); }
 
   /** Get the altitude above ground level.
       @return the altitude AGL in feet.
@@ -377,7 +378,7 @@ public:
       @see SetGroundCallback */
   double GetContactPoint(FGLocation& contact, FGColumnVector3& normal,
                          FGColumnVector3& v, FGColumnVector3& w) const
-  { ComputeDerived(); return GroundCallback->GetAGLevel(*this, contact, normal, v, w); }
+  { ComputeDerived(); return GetAGLevel(*this, contact, normal, v, w); }
   ///@}
 
   /** Sets the ground callback pointer. The FGGroundCallback instance will be
@@ -390,7 +391,7 @@ public:
       @param gc A pointer to a ground callback object
       @see FGGroundCallback
    */
-  static void SetGroundCallback(FGGroundCallback* gc) { GroundCallback = gc; }
+ // static void SetGroundCallback(FGGroundCallback* gc) { GroundCallback = gc; }
 
   /** Get a pointer to the ground callback currently used. Since the
       FGGroundcallback instance might have been created outside JSBSim, it is
@@ -401,7 +402,7 @@ public:
       @return A pointer to the current ground callback object.
       @see FGGroundCallback
    */
-  static FGGroundCallback* GetGroundCallback(void) { return GroundCallback; }
+//  static FGGroundCallback* GetGroundCallback(void) { return GroundCallback; }
 
   /** Transform matrix from local horizontal to earth centered frame.
       @return a const reference to the rotation matrix of the transform from
@@ -671,7 +672,7 @@ private:
   mutable bool mCacheValid;
 
   /** The ground callback object pointer */
-  static FGGroundCallback_ptr GroundCallback;
+//  static FGGroundCallback_ptr GroundCallback;
 };
 
 /** Scalar multiplication.
@@ -685,7 +686,6 @@ inline FGLocation operator*(double scalar, const FGLocation& l)
   return l.operator*(scalar);
 }
 
-} // namespace JSBSim
 
 //%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 #endif

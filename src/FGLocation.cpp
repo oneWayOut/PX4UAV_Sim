@@ -45,13 +45,10 @@ INCLUDES
 
 #include "FGLocation.h"
 
-namespace JSBSim {
 
-IDENT(IdSrc,"$Id: FGLocation.cpp,v 1.34 2015/09/20 20:53:13 bcoconni Exp $");
-IDENT(IdHdr,ID_LOCATION);
 
 // Set up the default ground callback object.
-FGGroundCallback_ptr FGLocation::GroundCallback = NULL;
+//FGGroundCallback_ptr FGLocation::GroundCallback = NULL;
 
 /*%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 CLASS IMPLEMENTATION
@@ -461,4 +458,3 @@ double FGLocation::GetHeadingTo(double target_longitude,
 
 //%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-} // namespace JSBSim

@@ -47,10 +47,7 @@ INCLUDES
 
 using namespace std;
 
-namespace JSBSim {
 
-IDENT(IdSrc,"$Id: FGMatrix33.cpp,v 1.16 2014/01/13 10:46:03 ehofman Exp $");
-IDENT(IdHdr,ID_MATRIX33);
 
 /*%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 CLASS IMPLEMENTATION
@@ -507,4 +504,4 @@ FGColumnVector3 FGMatrix33::operator*(const FGColumnVector3& v) const
   return FGColumnVector3( tmp1, tmp2, tmp3 );
 }
 
-}
+
