@@ -14,4 +14,9 @@ double GetAGLevel(const FGLocation& loc,
 					FGLocation& contact, FGColumnVector3& normal,
 					FGColumnVector3& vel, FGColumnVector3& angularVel);
 
+const FGColumnVector3 GetOmegaPlanet();
+
+double GetSemimajor(void);
+double GetSemiminor(void);
+
 #endif

@@ -156,7 +156,7 @@ void FGPropagate::SetInitialState()
   UpdateBodyMatrices();
 
   // Set the velocities in the instantaneus body frame
-  VState.vUVW; // = FGIC->GetUVWFpsIC();
+  VState.vUVW = FGColumnVector3(); // = FGIC->GetUVWFpsIC();
 
   // Compute the local frame ECEF velocity
   vVel = Tb2l * VState.vUVW;
@@ -166,7 +166,7 @@ void FGPropagate::SetInitialState()
 
   // Set the angular velocities of the body frame relative to the ECEF frame,
   // expressed in the body frame.
-  VState.vPQR; // = FGIC->GetPQRRadpsIC();
+  VState.vPQR = FGColumnVector3(); // = FGIC->GetPQRRadpsIC();
 
   VState.vPQRi = VState.vPQR + Ti2b * in.vOmegaPlanet;
 
