@@ -3,6 +3,11 @@
 
 using namespace std;
 
+
+
+
+
+
 int main()
 {
 	FGPropagate* Propagate = new FGPropagate();
@@ -22,22 +27,28 @@ int main()
 
     Propagate->InitializeDerivatives();
 
+    //todo other initialize
+
 	cout << "Hello World!" << endl;
+
+    FGColumnVector3 Forces;
+    FGColumnVector3 Moments;
+    double          Mass = 1.0;
+    // The body inertia matrix expressed in the body frame
+    FGMatrix33      J(0.8244, 0    , -0.1204,
+                      0     , 1.135, 0,
+                      0.1204, 0    , 1.759);
 
     double duration = 0;
     double thisTime = 0;
     while(thisTime < duration)
     {
-        //in.vPQRidot,          VState.dqPQRidot,          dt, integrator_rotational_rate);
-        //Integrate(VState.vInertialPosition, VState.vInertialVelocity, VState.dqInertialVelocity, dt, integrator_translational_position);
-        //Integrate(VState.vInertialVelocity, in.vUVWidot,
-
-        //caitodo get in.vPQRidot and in.vUVWidot at each cycle;
-        //or put the assignment inside Propagate->Run() function;
+        //caitodo Calculate forces and moments in body frame;
+        //Using formulas from Small unmmaned aircraft.
 
 
 
-        Propagate->Run(true);
+        Propagate->Run(Mass, J, Forces, Moments);
         thisTime += Propagate->in.DeltaT;
     }
 

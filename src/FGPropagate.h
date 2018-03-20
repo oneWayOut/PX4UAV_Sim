@@ -167,6 +167,10 @@ public:
 
   void InitializeDerivatives();
 
+  void CalculatePQRdot(const FGMatrix33 & J, const FGColumnVector3 & Moment);
+
+  void CalculateUVWdot(double Mass, const FGColumnVector3 & Force);
+
   /** Runs the state propagation model; called by the Executive
       Can pass in a value indicating if the executive is directing the simulation to Hold.
       @param Holding if true, the executive has been directed to hold the sim from
@@ -174,7 +178,7 @@ public:
                      model, which may need to be active to listen on a socket for the
                      "Resume" command to be given.
       @return false if no error */
-  bool Run(bool Holding);
+  bool Run(double Mass, const FGMatrix33 &J, const FGColumnVector3 & Force, FGColumnVector3 & Moment);
 
   /** Retrieves the velocity vector.
       The vector returned is represented by an FGColumnVector reference. The vector
