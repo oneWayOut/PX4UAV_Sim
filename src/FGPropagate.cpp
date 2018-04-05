@@ -132,13 +132,14 @@ bool FGPropagate::InitModel(void)
 
 //%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-void FGPropagate::SetInitialState()
+void FGPropagate::SetInitialState(const FGLocation& location, const FGQuaternion& qAttitude,
+                                  const FGColumnVector3& uvwBody, const FGColumnVector3& pqr)
 {
     // Initialize the State Vector elements and the transformation matrices
 
-    //caitodo set the initial state value!!!
+    //caichanged set the initial state value!!!
     // Set the position lat/lon/radius
-    VState.vLocation;// = FGIC->GetPosition();
+    VState.vLocation = location;// = FGIC->GetPosition();
 
     Ti2ec = VState.vLocation.GetTi2ec(); // ECI to ECEF transform
     Tec2i = Ti2ec.Transposed();          // ECEF to ECI frame transform
@@ -150,13 +151,13 @@ void FGPropagate::SetInitialState()
     // Set the orientation from the euler angles (is normalized within the
     // constructor). The Euler angles represent the orientation of the body
     // frame relative to the local frame.
-    VState.qAttitudeLocal; // = FGIC->GetOrientation();
+    VState.qAttitudeLocal = qAttitude; // = FGIC->GetOrientation();
 
     VState.qAttitudeECI = Ti2l.GetQuaternion()*VState.qAttitudeLocal;
     UpdateBodyMatrices();
 
     // Set the velocities in the instantaneus body frame
-    VState.vUVW = FGColumnVector3(); // = FGIC->GetUVWFpsIC();
+    VState.vUVW = uvwBody; // = FGIC->GetUVWFpsIC();
 
     // Compute the local frame ECEF velocity
     vVel = Tb2l * VState.vUVW;
@@ -166,7 +167,7 @@ void FGPropagate::SetInitialState()
 
     // Set the angular velocities of the body frame relative to the ECEF frame,
     // expressed in the body frame.
-    VState.vPQR = FGColumnVector3(); // = FGIC->GetPQRRadpsIC();
+    VState.vPQR = pqr; // = FGIC->GetPQRRadpsIC();
 
     VState.vPQRi = VState.vPQR + Ti2b * in.vOmegaPlanet;
 
@@ -211,11 +212,6 @@ bool FGPropagate::Run(double Mass, const FGMatrix33 &J, const FGColumnVector3 & 
     //added by cai  calculate UVWidot and PQRidot
     CalculatePQRdot(J, Moment);
     CalculateUVWdot(Mass, Force);
-
-
-
-
-
 
     double rate = 1;
     double dt = in.DeltaT * rate;  // The 'stepsize'
@@ -632,7 +628,7 @@ void FGPropagate::RecomputeLocalTerrainVelocity()
 void FGPropagate::SetTerrainElevation(double terrainElev)
 {
     double radius = terrainElev + VState.vLocation.GetSeaLevelRadius();
-    //caitodo
+    //caiNote useless
     //FDMExec->GetGroundCallback()->SetTerrainGeoCentRadius(radius);
 }
 
@@ -641,7 +637,7 @@ void FGPropagate::SetTerrainElevation(double terrainElev)
 
 void FGPropagate::SetSeaLevelRadius(double tt)
 {
-    //todo
+    //caiNote useless
     //FDMExec->GetGroundCallback()->SetSeaLevelRadius(tt);
 }
 

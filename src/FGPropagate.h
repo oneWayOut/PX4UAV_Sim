@@ -580,7 +580,8 @@ public:
   void SetDistanceAGL(double tt);
   void SetDistanceAGLKm(double tt);
 
-  void SetInitialState(/*const FGInitialCondition**/);
+  void SetInitialState(const FGLocation& location, const FGQuaternion& qAttitude,
+                                    const FGColumnVector3& uvwBody, const FGColumnVector3& pqr);
   void SetLocation(const FGLocation& l);
   void SetLocation(const FGColumnVector3& lv)
   {

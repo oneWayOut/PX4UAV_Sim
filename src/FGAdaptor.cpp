@@ -1,11 +1,5 @@
 #include "FGAdaptor.h"
 
-//todo change the value
-static double mSeaLevelRadius = 6131;
-static double mTerrainLevelRadius = 6131;
-
-
-
 
 // Earth defaults
 static const double RotationRate    = 0.00007292115;     //rad/s
@@ -16,6 +10,9 @@ static const double a               = 6378137.0;     // WGS84 semimajor axis len
 static const double b               = 6356752.314245;      // WGS84 semiminor axis length in meter
 static const double RadiusReference = a;
 
+
+static double mSeaLevelRadius = RadiusReference;
+static double mTerrainLevelRadius = mSeaLevelRadius;
 
 
 
