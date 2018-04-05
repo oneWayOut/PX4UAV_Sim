@@ -1,6 +1,6 @@
 #include "FGAdaptor.h"
 
-
+#if 0  //sc uinit
 // Earth defaults
 static const double RotationRate    = 0.00007292115;     //rad/s
 static const double GM              = 3.986004418E14; //14.0764417572E15;   // WGS84 value
@@ -8,6 +8,20 @@ static const double C2_0            = -4.84165371736E-04; // WGS84 value for the
 static const double J2              = 1.081874E-03;// 1.08262982E-03;     // WGS84 value for J2
 static const double a               = 6378137.0;     // WGS84 semimajor axis length in meter
 static const double b               = 6356752.314245;      // WGS84 semiminor axis length in meter
+
+#else  //ft
+
+static const double RotationRate    = 0.00007292115;
+static const double GM              = 14.0764417572E15;   // WGS84 value
+static const double C2_0            = -4.84165371736E-04; // WGS84 value for the C2,0 coefficient
+static const double J2              = 1.08262982E-03;     // WGS84 value for J2
+static const double a               = 20925646.32546;     // WGS84 semimajor axis length in feet
+static const double b               = 20855486.5951;      // WGS84 semiminor axis length in feet
+#endif
+
+
+
+
 static const double RadiusReference = a;
 
 

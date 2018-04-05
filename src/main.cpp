@@ -5,7 +5,7 @@
 using namespace std;
 
 //initial state
-double longitude = -90;
+double longitude = 90;
 double latitude = 0;
 double alt = 0;
 
@@ -15,7 +15,7 @@ double theta = 45;
 double psi = 45;
 
 //uvw velocity in body frame
-FGColumnVector3 vUVW_body(60, 0, 0);
+FGColumnVector3 vUVW_body(200, 0, 0);
 //pqr Note: derived value!
 FGColumnVector3 vPQR_body;
 
@@ -77,9 +77,9 @@ int main()
     FGColumnVector3 Moments;
     double          Mass = 1.0;
     // The body inertia matrix expressed in the body frame
-    FGMatrix33      J(0.8244, 0    , -0.1204,
-                      0     , 1.135, 0,
-                      0.1204, 0    , 1.759);
+    FGMatrix33      J(20, 0 , 0,
+                      0 ,10, 0,
+                      0, 0 , 10);
 
 
     std::ofstream out("out.txt");
