@@ -11,7 +11,8 @@ SOURCES += \
     src/FGMatrix33.cpp \
     src/FGPropagate.cpp \
     src/FGQuaternion.cpp \
-    src/FGAdaptor.cpp
+    src/FGAdaptor.cpp \
+    src/ForceMoments.cpp
 
 HEADERS += \
     src/FGColumnVector3.h \
@@ -20,5 +21,6 @@ HEADERS += \
     src/FGMatrix33.h \
     src/FGPropagate.h \
     src/FGQuaternion.h \
-    src/FGAdaptor.h
+    src/FGAdaptor.h \
+    src/ForceMoments.h
 

@@ -2,6 +2,8 @@
 #include <fstream>
 #include "FGPropagate.h"
 
+#include "ForceMoments.h"
+
 using namespace std;
 
 //initial state
@@ -18,6 +20,12 @@ double psi = 45;
 FGColumnVector3 vUVW_body(200, 0, 0);
 //pqr Note: derived value!
 FGColumnVector3 vPQR_body;
+
+const double     Mass = 1.0;
+// The body inertia matrix expressed in the body frame
+const FGMatrix33 J(20, 0 , 0,
+                   0 ,10, 0,
+                   0, 0 , 10);
 
 
 FGColumnVector3 calcPQR_body(const FGQuaternion& orientation, const FGLocation& position,
@@ -73,18 +81,12 @@ int main()
 
 	cout << "Hello World!" << endl;
 
-    FGColumnVector3 Forces;
-    FGColumnVector3 Moments;
-    double          Mass = 1.0;
-    // The body inertia matrix expressed in the body frame
-    FGMatrix33      J(20, 0 , 0,
-                      0 ,10, 0,
-                      0, 0 , 10);
-
-
     std::ofstream out("out.txt");
     std::streambuf *coutbuf = std::cout.rdbuf(); //save old buf
     std::cout.rdbuf(out.rdbuf()); //redirect std::cout to out.txt!
+
+
+    ForceMoments f_m;
 
     double duration = 30.0;
     double thisTime = 0;
@@ -92,6 +94,14 @@ int main()
     {
         //caitodo Calculate forces and moments in body frame;
         //Using formulas from Small unmmaned aircraft.
+
+        //todo  create a new thread to recv PX4 msg
+        //f_m.in.delta_a; delta_r, delta_e, delta_t from PX4 firmware actuator output
+        f_m.in.vPQR = Propagate->GetPQR();
+        //alpha and beta coulde be get from velocity vector;
+
+        FGColumnVector3 Forces = f_m.GetForces();
+        FGColumnVector3 Moments = f_m.GetMoments();
 
         Propagate->Run(Mass, J, Forces, Moments);
         thisTime += Propagate->in.DeltaT;
