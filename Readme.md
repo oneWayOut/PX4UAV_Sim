@@ -5,10 +5,14 @@ Try to make a light weight, standalone UAV simulator for PX4 firmware. It borrow
 
 ### Todo
 
-Initialize the model;
 forces and moments calculation;
 sensor message;
-Mavlink communication with Pixhawk 
+Mavlink communication with Pixhawk;
+ground react simulation;
+
+### History
+
+2018.4.14 Finish the 6 Dof full motion formula simulation.
 
 
 ### References
@@ -22,3 +26,4 @@ Mavlink communication with Pixhawk
 calculate lon and lat with spherical earth assumption.  Just for simulation.
   * http://www.movable-type.co.uk/scripts/latlong.html
   * http://www.movable-type.co.uk/scripts/latlong-vincenty.html
+

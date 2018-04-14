@@ -50,6 +50,11 @@ FGColumnVector3 calcPQR_body(const FGQuaternion& orientation, const FGLocation& 
 
 int main()
 {
+    //zero forces and moments
+    FGColumnVector3 Forces;
+    FGColumnVector3 Moments;
+
+
 	FGPropagate* Propagate = new FGPropagate();
 
     //initialize all input values
@@ -58,7 +63,7 @@ int main()
     Propagate->in.SemiMinor = GetSemiminor();
     Propagate->in.vPQRidot  = FGColumnVector3();  //     = Accelerations->GetPQRidot();
     Propagate->in.vUVWidot  = FGColumnVector3();  //     = Accelerations->GetUVWidot();
-    Propagate->in.DeltaT = 0.01;  //       = dT;
+
 
     //initialize modle state;
     Propagate->InitModel();
@@ -75,21 +80,28 @@ int main()
 
     Propagate->SetInitialState(position, orientation, vUVW_body, vPQR_body);
 
+    Propagate->in.DeltaT = 0;
+    Propagate->Run(Mass, J, Forces, Moments); //NOTE: to get initial Derivative for integration
+
     Propagate->InitializeDerivatives();
+
+    Propagate->in.DeltaT = 0.01;
 
     //todo any other initialize??
 
-	cout << "Hello World!" << endl;
+    ForceMoments f_m;
+
+    double duration = 30.0;
+    double thisTime = 0;
+
+
+    cout << "Hello World!" << endl;
 
     std::ofstream out("out.txt");
     std::streambuf *coutbuf = std::cout.rdbuf(); //save old buf
     std::cout.rdbuf(out.rdbuf()); //redirect std::cout to out.txt!
 
 
-    ForceMoments f_m;
-
-    double duration = 30.0;
-    double thisTime = 0;
     while(thisTime < duration)
     {
         //caitodo Calculate forces and moments in body frame;
@@ -100,8 +112,8 @@ int main()
         f_m.in.vPQR = Propagate->GetPQR();
         //alpha and beta coulde be get from velocity vector;
 
-        FGColumnVector3 Forces = f_m.GetForces();
-        FGColumnVector3 Moments = f_m.GetMoments();
+        Forces = f_m.GetForces();
+        Moments = f_m.GetMoments();
 
         Propagate->Run(Mass, J, Forces, Moments);
         thisTime += Propagate->in.DeltaT;
